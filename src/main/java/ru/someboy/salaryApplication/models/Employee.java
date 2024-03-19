@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+
+import java.time.LocalDate;
 //import jakarta.persistence.Table;
 
 @Entity
@@ -26,6 +28,12 @@ public class Employee {
 
     @Column(name = "password")
     private int password;
+
+    @Column(name = "date_of_birth")
+    private LocalDate dateOfBirth;
+
+    @Column(name = "is_work")
+    private Boolean isWork;
 
     public Employee(String username, int password) {
         this.username = username;
