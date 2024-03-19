@@ -1,6 +1,7 @@
 package ru.someboy.salaryApplication.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,35 +9,30 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.time.LocalDate;
-//import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "employee")
+@Table(name = "data")
 @Getter
 @Setter
 @NoArgsConstructor
 @ToString
-public class Employee {
+public class Data {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "username")
+    @Column(name = "name")
     @Size(min = 2, max = 30, message = "Name should be between 2 and 30 characters")
-    private String username;
+    private String name;
 
-    @Column(name = "password")
-    private int password;
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "employee", referencedColumnName = "id")
+    private Employee employee;
 
-    @Column(name = "date_of_birth")
-    private LocalDate dateOfBirth;
-
-    @Column(name = "is_work")
-    private Boolean isWork;
-
-    public Employee(String username, int password) {
-        this.username = username;
-        this.password = password;
-    }
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "shop", referencedColumnName = "id")
+    private Shop shop;
 }
