@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "repair")
 @Getter
@@ -20,9 +22,38 @@ public class Repair {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
-    @Size(min = 2, max = 30, message = "Name should be between 2 and 30 characters")
-    private String name;
+    @NotNull
+    @Column(name = "repairs_count")
+    private Integer repairsCount;
+
+    @NotNull
+    @Column(name = "repairs_revenue")
+    private Integer repairsRevenue;
+
+    @NotNull
+    @Column(name = "repairs_purchase")
+    private Integer repairsPurchase;
+
+    @NotNull
+    @Column(name = "repairs_profit")
+    private Double repairsProfit;
+
+    @NotNull
+    @Column(name = "repairs_salary")
+    private Double repairsSalary;
+
+    @NotNull
+    @Column(name = "date_of_entry")
+    private LocalDateTime dateOfEntry;
+
+    @NotNull
+    @Column(name = "date_of_data")
+    private LocalDateTime dateOfData;
+
+    @NotNull
+    @Column(name = "annotation")
+    @Size(max = 300, message = "Аннотация не должна содержать более 300 символов")
+    private String annotation;
 
     @NotNull
     @ManyToOne

@@ -8,6 +8,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.time.LocalDate;
+import java.util.List;
 //import jakarta.persistence.Table;
 
 @Entity
@@ -32,11 +33,18 @@ public class Employee {
     @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
 
+    @Column(name = "date_of_registration")
+    private LocalDate dateOfRegistration;
+
     @Column(name = "is_work")
     private Boolean isWork;
 
-    public Employee(String username, int password) {
+    @OneToMany(mappedBy = "employee")
+    private List<Authority> authorities;
+
+    public Employee(String username, int password, LocalDate dateOfBirth) {
         this.username = username;
         this.password = password;
+        this.dateOfBirth = dateOfBirth;
     }
 }
