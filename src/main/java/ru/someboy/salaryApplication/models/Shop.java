@@ -8,6 +8,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.LocalDate;
+import java.util.List;
+
 @Entity
 @Table(name = "shop")
 @Getter
@@ -22,12 +25,12 @@ public class Shop {
 
     @NotNull
     @Column(name = "name")
-    @Size(min = 3, max = 30, message = "Name should be between 3 and 30 characters")
+    @Size(min = 3, max = 30, message = "Название должно содержать от 3 до 30 символов")
     private String name;
 
     @NotNull
     @Column(name = "rental")
-    private Integer rental;
+    private Double rental;
 
     @NotNull
     @Column(name = "accessories_percent")
@@ -37,5 +40,15 @@ public class Shop {
     @Column(name = "is_work")
     private Boolean isWork;
 
+    @Column(name = "date_of_registration")
+    private LocalDate dateOfRegistration;
 
+    @NotNull
+    @ManyToMany
+    @JoinTable(
+            name = "shop_employee",
+            joinColumns = @JoinColumn(name = "shop_id"),
+            inverseJoinColumns = @JoinColumn(name = "employee_id")
+    )
+    private List<Employee> employees;
 }

@@ -23,6 +23,11 @@ public class Repair {
     private Long id;
 
     @NotNull
+    @Column(name = "phone_number")
+    @Size(min = 10,max = 15, message = "Номер телефона должен содержать от 10 до 15 символов")
+    private String phoneNumber;
+
+    @NotNull
     @Column(name = "repairs_count")
     private Integer repairsCount;
 
@@ -47,26 +52,26 @@ public class Repair {
     private LocalDateTime dateOfEntry;
 
     @NotNull
-    @Column(name = "date_of_data")
-    private LocalDateTime dateOfData;
+    @Column(name = "date_of_repair")
+    private LocalDateTime dateOfRepair;
 
     @NotNull
     @Column(name = "annotation")
-    @Size(max = 300, message = "Аннотация не должна содержать более 300 символов")
+    @Size(max = 300, message = "Аннотация должна содержать не более 300 символов")
     private String annotation;
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "employee", referencedColumnName = "id")
+    @JoinColumn(name = "employee_id", referencedColumnName = "id")
     private Employee employee;
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "seller", referencedColumnName = "id")
+    @JoinColumn(name = "seller_id", referencedColumnName = "id")
     private Employee seller;
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "master", referencedColumnName = "id")
+    @JoinColumn(name = "master_id", referencedColumnName = "id")
     private Employee master;
 }

@@ -39,10 +39,10 @@ public class Data {
     private Integer marketingMargin;
 
     @Column(name = "marketing_margin_profit")
-    private Integer marketingMarginProfit;
+    private Double marketingMarginProfit;
 
     @Column(name = "marketing_margin_salary")
-    private Integer marketingMarginSalary;
+    private Double marketingMarginSalary;
 
     @Column(name = "devices_count")
     private Integer devicesCount;
@@ -94,16 +94,16 @@ public class Data {
     private Integer cashless;
 
     @Column(name = "salary")
-    private Integer salary;
+    private Double salary;
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "employee", referencedColumnName = "id")
+    @JoinColumn(name = "employee_id", referencedColumnName = "id")
     private Employee employee;
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "shop", referencedColumnName = "id")
+    @JoinColumn(name = "shop_id", referencedColumnName = "id")
     private Shop shop;
 
     @Transient

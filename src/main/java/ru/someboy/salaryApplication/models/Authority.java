@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.List;
+
 @Entity
 @Table(name = "authority")
 @Getter
@@ -29,7 +31,11 @@ public class Authority {
     private String value;
 
     @NotNull
-    @ManyToOne
-    @JoinColumn(name = "employee", referencedColumnName = "id")
-    private Employee employee;
+    @ManyToMany
+    @JoinTable(
+            name = "authority_employee",
+            joinColumns = @JoinColumn(name = "authority_id"),
+            inverseJoinColumns = @JoinColumn(name = "employee_id")
+    )
+    private List<Employee> employees;
 }

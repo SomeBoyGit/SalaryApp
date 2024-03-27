@@ -9,7 +9,6 @@ import lombok.ToString;
 
 import java.time.LocalDate;
 import java.util.List;
-//import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "employee")
@@ -24,7 +23,7 @@ public class Employee {
     private Long id;
 
     @Column(name = "username")
-    @Size(min = 2, max = 30, message = "Name should be between 2 and 30 characters")
+    @Size(min = 2, max = 50, message = "ФИО должно содержать от 2 до 50 символов")
     private String username;
 
     @Column(name = "password")
@@ -39,8 +38,14 @@ public class Employee {
     @Column(name = "is_work")
     private Boolean isWork;
 
-    @OneToMany(mappedBy = "employee")
+    @ManyToMany(mappedBy = "employees")
     private List<Authority> authorities;
+
+    @ManyToMany(mappedBy = "employees")
+    private List<Shop> shops;
+
+    @OneToMany(mappedBy = "employee")
+    private List<Repair> repairs;
 
     public Employee(String username, int password, LocalDate dateOfBirth) {
         this.username = username;
