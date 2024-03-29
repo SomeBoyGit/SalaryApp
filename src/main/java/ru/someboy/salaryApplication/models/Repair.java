@@ -48,12 +48,20 @@ public class Repair {
     private Double repairsSalary;
 
     @NotNull
-    @Column(name = "date_of_entry")
-    private LocalDateTime dateOfEntry;
+    @Column(name = "date_of_acceptance")
+    private LocalDateTime dateOfAcceptance;
 
     @NotNull
-    @Column(name = "date_of_repair")
-    private LocalDateTime dateOfRepair;
+    @Column(name = "date_of_readiness")
+    private LocalDateTime dateOfReadiness;
+
+    @NotNull
+    @Column(name = "date_of_issue")
+    private LocalDateTime dateOfIssue;
+
+    @NotNull
+    @Column(name = "is_done")
+    private Boolean isDone;
 
     @NotNull
     @Column(name = "annotation")
@@ -74,4 +82,9 @@ public class Repair {
     @ManyToOne
     @JoinColumn(name = "master_id", referencedColumnName = "id")
     private Employee master;
+
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "shop_id", referencedColumnName = "id")
+    private Shop shop;
 }

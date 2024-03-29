@@ -3,6 +3,7 @@ package ru.someboy.salaryApplication.util;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
 public final class Methods {
     public static LocalDateTime stringDateTimeToLocalDateTime(String dateTime) {
@@ -16,5 +17,9 @@ public final class Methods {
 
     public static LocalDateTime stringDateTimeToLocalDateTimePlusMin(String dateTime) {
         return dateTimeToStartDay(stringDateTimeToLocalDateTime(dateTime));
+    }
+
+    public static Object getPresentOptional(Optional<?> optional) {
+        return optional.orElse(null);
     }
 }

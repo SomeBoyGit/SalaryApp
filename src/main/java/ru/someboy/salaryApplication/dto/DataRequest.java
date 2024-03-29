@@ -1,13 +1,11 @@
 package ru.someboy.salaryApplication.dto;
 
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Getter
-@Setter
+@Data
 public class DataRequest {
     private Integer accessoriesCount;
 
@@ -15,11 +13,21 @@ public class DataRequest {
 
     private Integer marketingMargin;
 
+    private Integer simCount;
+
+    private Integer simRevenue;
+
     private Integer devicesCount;
 
     private Integer devicesRevenue;
 
     private Integer devicesPurchase;
+
+    private Integer repairsCount;
+
+    private Integer repairsRevenue;
+
+    private Integer repairsPurchase;
 
     private LocalDateTime dateOfData;
 

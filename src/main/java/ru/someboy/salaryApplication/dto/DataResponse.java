@@ -39,6 +39,15 @@ public class DataResponse {
     private Double marketingMarginSalary;
 
     @NotNull
+    private Integer simCount;
+
+    @NotNull
+    private Integer simRevenue;
+
+    @NotNull
+    private Double simSalary;
+
+    @NotNull
     private Integer devicesCount;
 
     @NotNull
@@ -48,7 +57,7 @@ public class DataResponse {
     private Integer devicesPurchase;
 
     @NotNull
-    private Double devicesProfit;
+    private Integer devicesProfit;
 
     @NotNull
     private Double devicesSalary;
@@ -63,7 +72,7 @@ public class DataResponse {
     private Integer repairsPurchase;
 
     @NotNull
-    private Double repairsProfit;
+    private Integer repairsProfit;
 
     @NotNull
     private Double repairsSalary;

@@ -37,13 +37,25 @@ public class Shop {
     private Integer accessoriesPercent;
 
     @NotNull
+    @Column(name = "marketing_margin_percent")
+    private Integer marketingMarginPercent;
+
+    @NotNull
+    @Column(name = "sim_percent")
+    private Integer simPercent;
+
+    @NotNull
+    @Column(name = "devices_percent")
+    private Integer devicesPercent;
+
+    @NotNull
     @Column(name = "is_work")
     private Boolean isWork;
 
+    @NotNull
     @Column(name = "date_of_registration")
     private LocalDate dateOfRegistration;
 
-    @NotNull
     @ManyToMany
     @JoinTable(
             name = "shop_employee",
@@ -51,4 +63,10 @@ public class Shop {
             inverseJoinColumns = @JoinColumn(name = "employee_id")
     )
     private List<Employee> employees;
+
+    @OneToMany(mappedBy = "shop")
+    private List<Data> data;
+
+    @OneToMany(mappedBy = "shop")
+    private List<Repair> repairs;
 }

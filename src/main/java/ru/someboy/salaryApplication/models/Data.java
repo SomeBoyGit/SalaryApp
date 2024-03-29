@@ -44,6 +44,15 @@ public class Data {
     @Column(name = "marketing_margin_salary")
     private Double marketingMarginSalary;
 
+    @Column(name = "sim_count")
+    private Integer simCount;
+
+    @Column(name = "sim_revenue")
+    private Integer simRevenue;
+
+    @Column(name = "sim_salary")
+    private Double simSalary;
+
     @Column(name = "devices_count")
     private Integer devicesCount;
 
@@ -54,7 +63,7 @@ public class Data {
     private Integer devicesPurchase;
 
     @Column(name = "devices_profit")
-    private Double devicesProfit;
+    private Integer devicesProfit;
 
     @Column(name = "devices_salary")
     private Double devicesSalary;
@@ -69,7 +78,7 @@ public class Data {
     private Integer repairsPurchase;
 
     @Column(name = "repairs_profit")
-    private Double repairsProfit;
+    private Integer repairsProfit;
 
     @Column(name = "repairs_salary")
     private Double repairsSalary;
