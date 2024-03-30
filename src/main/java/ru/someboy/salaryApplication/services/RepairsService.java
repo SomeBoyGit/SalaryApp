@@ -3,6 +3,7 @@ package ru.someboy.salaryApplication.services;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.someboy.salaryApplication.models.Data;
 import ru.someboy.salaryApplication.models.Employee;
 import ru.someboy.salaryApplication.models.Repair;
 import ru.someboy.salaryApplication.repositories.RepairsRepository;
@@ -116,6 +117,17 @@ public class RepairsService {
      * Если продавец, выдающий и мастер - разные люди*/
     private void salaryCalculation() {
 
+    }
+
+    /*TODO
+    *  Нужно создавать Data при выдаче ремонта
+    *  Если Data уже создана, то обновляем её добавляя СУММУ всех ремонтов этого сотрудника
+    *  и пересчитываем зарплату
+    *  Ещё нужно пересчитывать Data, если ремонт отменён,
+    *  если отменён последний ремонт, а в Data были только ремонты - Data УДАЛИТЬ.
+    *  Создавать и удалять в DataService, не здесь.....*/
+    private Data createOrUpdateDataInRepair() {
+        return null;
     }
 
     private Repair enrichCancelledIssueRepair(Long id) {
