@@ -6,9 +6,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.someboy.salaryApplication.dto.RepairAcceptance;
+import ru.someboy.salaryApplication.dto.RepairDone;
+import ru.someboy.salaryApplication.dto.RepairIssue;
 import ru.someboy.salaryApplication.dto.RepairResponse;
 import ru.someboy.salaryApplication.models.Repair;
+import ru.someboy.salaryApplication.services.EmployeesService;
 import ru.someboy.salaryApplication.services.RepairsService;
+import ru.someboy.salaryApplication.services.ShopsService;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,6 +22,8 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class RepairsController {
     private final RepairsService repairsService;
+    private final EmployeesService employeesService;
+    private final ShopsService shopsService;
     private final ModelMapper modelMapper;
 
     @GetMapping
@@ -31,29 +37,51 @@ public class RepairsController {
     }
 
     @PostMapping
-    public ResponseEntity<HttpStatus> repairAcceptance(@RequestBody RepairAcceptance repairAcceptance) {
-        repairsService.save(convertToRepair(repairAcceptance));
+    public ResponseEntity<HttpStatus> create(@RequestBody RepairAcceptance repairAcceptance) {
+        Repair repair = convertToRepair(repairAcceptance);
+        repair.setShop(shopsService.findOne(repairAcceptance.getShopId()));
+        repairsService.save(repair);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<HttpStatus> update(@RequestBody RepairAcceptance repairRequest, @PathVariable("id") long id) {
-        repairsService.update(convertToRepair(repairRequest), id);
+    @PatchMapping("/done/{id}")
+    public ResponseEntity<HttpStatus> updateDone(@PathVariable("id") long id) {
+        repairsService.updateDoneRepair(id);
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+    @PatchMapping("/cancel_done/{id}")
+    public ResponseEntity<HttpStatus> updateCancelDone(@PathVariable("id") long id) {
+        repairsService.updateCancelDoneRepair(id);
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+    @PatchMapping("/issue/{id}")
+    public ResponseEntity<HttpStatus> updateIssue(@RequestBody RepairIssue repairIssue, @PathVariable("id") long id) {
+        repairsService.updateIssueRepair(convertToRepair(repairIssue), id);
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+    @PatchMapping("/cancel_issue/{id}")
+    public ResponseEntity<HttpStatus> updateCancelIssue(@PathVariable("id") long id) {
+        repairsService.cancelledIssue(id);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> delete(@PathVariable("id") long id) {
         repairsService.delete(id);
-        return ResponseEntity.ok(HttpStatus.valueOf("Удалено"));
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    private Repair convertToRepair(RepairAcceptance repairRequest) {
-        return modelMapper.map(repairRequest, Repair.class);
+    private Repair convertToRepair(RepairAcceptance repairAcceptance) {
+        return modelMapper.map(repairAcceptance, Repair.class);
     }
 
-    private Repair convertToRepair(RepairResponse repairResponse) {
-        return modelMapper.map(repairResponse, Repair.class);
+    private Repair convertToRepair(RepairIssue repairIssue) {
+        Repair repair = modelMapper.map(repairIssue, Repair.class);
+        repair.setMaster(employeesService.findOne(repairIssue.getMasterId()));
+        return repair;
     }
 
     private RepairResponse convertToRepairResponse(Repair repair) {
