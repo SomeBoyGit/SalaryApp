@@ -9,6 +9,7 @@ import ru.someboy.salaryApplication.models.Repair;
 import ru.someboy.salaryApplication.repositories.RepairsRepository;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import static ru.someboy.salaryApplication.util.Methods.getPresentOptional;
@@ -92,8 +93,6 @@ public class RepairsService {
     private Repair enrichUpdate(Repair repair, Long id) {
         Repair updateRepair = (Repair) getPresentOptional(repairsRepository.findById(id));
         if (updateRepair.getIsDone()) {
-            int sellerPercent = 10;// TODO времянка
-            int masterPercent = 45;// TODO времянка
             updateRepair.setRepairsRevenue(repair.getRepairsRevenue());
             updateRepair.setRepairsPurchase(repair.getRepairsPurchase());
             updateRepair.setDateOfIssue(LocalDateTime.now());
@@ -102,30 +101,65 @@ public class RepairsService {
             updateRepair.setEmployee(employeesService.findOne(2));// TODO времянка
             updateRepair.setMaster(repair.getMaster());
             updateRepair.setRepairsProfit((double) (repair.getRepairsRevenue() - repair.getRepairsPurchase()));
-//            TODO добавить метод расчета sellerSalary,masterSalary.
-            updateRepair.setSellerSalary(updateRepair.getRepairsProfit() * sellerPercent / 100);// TODO времянка
-            updateRepair.setMasterSalary(updateRepair.getRepairsProfit() * masterPercent / 100);// TODO времянка
+            updateRepair.setSellerSalary(
+                    salaryCalculation(repair.getRepairsProfit(), repair.getEmployee(), repair.getSeller(), repair.getMaster())
+                            .get(0));
+            updateRepair.setMasterSalary(
+                    salaryCalculation(repair.getRepairsProfit(), repair.getEmployee(), repair.getSeller(), repair.getMaster())
+                            .get(1));
         }
         return updateRepair;
     }
 
     /*TODO
-     * Если продавец, выдающий и мастер -- один человек
-     * Если продавец и выдающий - один, мастер - другой
-     * Если продавец и мастер - один, выдающий - другой
-     * Если продавец один, выдающий и мастер - другой
-     * Если продавец, выдающий и мастер - разные люди*/
-    private void salaryCalculation() {
-
+     * Если принимающий, выдающий и мастер -- один человек
+     * Если принимающий и выдающий - один, мастер - другой
+     * Если принимающий и мастер - один, выдающий - другой
+     * Если принимающий один, выдающий и мастер - другой
+     * Если принимающий, выдающий и мастер - разные люди*/
+    private List<Double> salaryCalculation(Double repairProfit, Employee employee, Employee seller, Employee master) {
+        int sellerPercent = 10;// TODO времянка
+        int masterPercent = 45;// TODO времянка
+        long employeeId = employee.getId();// TODO времянка
+        long sellerId = seller.getId();// TODO времянка
+        long masterId = master.getId();// TODO времянка
+        double masterSalary = (repairProfit * masterPercent / 100) + (repairProfit * masterPercent / 100 / 2);
+        List<Double> salaryList = new ArrayList<>();
+        if (employeeId == masterId && sellerId == masterId) {
+            //* Если принимающий, выдающий и мастер -- один человек
+            salaryList.add(0, 0.0);
+            salaryList.add(1, masterSalary);
+        }
+        if (sellerId == masterId && employeeId != masterId) {
+            //* Если принимающий и мастер один, выдающий -- другой
+            salaryList.add(0, 0.0);
+            salaryList.add(1, masterSalary);
+        }
+        if (employeeId == sellerId && employeeId != masterId) {
+            //* Если принимающий и выдающий один, мастер -- другой
+            salaryList.add(0, repairProfit * sellerPercent / 100);
+            salaryList.add(1, repairProfit * masterPercent / 100);
+        }
+        if (employeeId == masterId && sellerId != masterId) {
+            //* Если принимающий один, выдающий и мастер -- другой
+            salaryList.add(0, repairProfit * sellerPercent / 100);
+            salaryList.add(1, repairProfit * masterPercent / 100);
+        }
+        if (employeeId != masterId && employeeId != sellerId && sellerId != masterId) {
+            //* Если принимающий, выдающий и мастер -- разные люди*/
+            salaryList.add(0, repairProfit * sellerPercent / 100);
+            salaryList.add(1, repairProfit * masterPercent / 100);
+        }
+        return salaryList;
     }
 
     /*TODO
-    *  Нужно создавать Data при выдаче ремонта
-    *  Если Data уже создана, то обновляем её добавляя СУММУ всех ремонтов этого сотрудника
-    *  и пересчитываем зарплату
-    *  Ещё нужно пересчитывать Data, если ремонт отменён,
-    *  если отменён последний ремонт, а в Data были только ремонты - Data УДАЛИТЬ.
-    *  Создавать и удалять в DataService, не здесь.....*/
+     *  Нужно создавать Data при выдаче ремонта
+     *  Если Data уже создана, то обновляем её добавляя СУММУ всех ремонтов этого сотрудника
+     *  и пересчитываем зарплату
+     *  Ещё нужно пересчитывать Data, если ремонт отменён,
+     *  если отменён последний ремонт, а в Data были только ремонты - Data УДАЛИТЬ.
+     *  Создавать и удалять в DataService, не здесь.....*/
     private Data createOrUpdateDataInRepair() {
         return null;
     }

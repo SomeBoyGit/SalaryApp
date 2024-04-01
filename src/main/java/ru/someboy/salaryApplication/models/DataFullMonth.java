@@ -1,6 +1,7 @@
 package ru.someboy.salaryApplication.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,6 +22,9 @@ public class DataFullMonth {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "count_day")
+    private Long countDay;
+
     @Column(name = "accessories_count")
     private Integer accessoriesCount;
 
@@ -37,10 +41,19 @@ public class DataFullMonth {
     private Integer marketingMargin;
 
     @Column(name = "marketing_margin_profit")
-    private Integer marketingMarginProfit;
+    private Double marketingMarginProfit;
 
     @Column(name = "marketing_margin_salary")
-    private Integer marketingMarginSalary;
+    private Double marketingMarginSalary;
+
+    @Column(name = "sim_count")
+    private Integer simCount;
+
+    @Column(name = "sim_revenue")
+    private Integer simRevenue;
+
+    @Column(name = "sim_salary")
+    private Double simSalary;
 
     @Column(name = "devices_count")
     private Integer devicesCount;
@@ -85,5 +98,10 @@ public class DataFullMonth {
     private Integer cashless;
 
     @Column(name = "salary")
-    private Integer salary;
+    private Double salary;
+
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "employee_id", referencedColumnName = "id")
+    private Employee employee;
 }

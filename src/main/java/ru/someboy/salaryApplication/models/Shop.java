@@ -1,5 +1,6 @@
 package ru.someboy.salaryApplication.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -16,7 +17,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
+//@ToString
 public class Shop {
     @Id
     @Column(name = "id")
@@ -64,9 +65,29 @@ public class Shop {
     )
     private List<Employee> employees;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "shop")
     private List<Data> data;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "shop")
     private List<Repair> repairs;
+
+    @Override
+    public String toString() {
+        return "Shop{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", rental=" + rental +
+                ", accessoriesPercent=" + accessoriesPercent +
+                ", marketingMarginPercent=" + marketingMarginPercent +
+                ", simPercent=" + simPercent +
+                ", devicesPercent=" + devicesPercent +
+                ", isWork=" + isWork +
+                ", dateOfRegistration=" + dateOfRegistration +
+                ", employees=" + employees +
+                ", data=" + data +
+                ", repairs=" + repairs +
+                '}';
+    }
 }

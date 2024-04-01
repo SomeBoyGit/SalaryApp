@@ -8,8 +8,13 @@ import org.springframework.web.bind.annotation.*;
 import ru.someboy.salaryApplication.dto.DataRequest;
 import ru.someboy.salaryApplication.dto.DataResponse;
 import ru.someboy.salaryApplication.models.Data;
+import ru.someboy.salaryApplication.models.Employee;
+import ru.someboy.salaryApplication.models.Repair;
 import ru.someboy.salaryApplication.services.DataService;
+import ru.someboy.salaryApplication.services.EmployeesService;
+import ru.someboy.salaryApplication.services.ShopsService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,7 +23,9 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class DataController {
     private final DataService dataService;
+    private final ShopsService shopsService;
     private final ModelMapper modelMapper;
+    private final EmployeesService employeesService;
 
     @GetMapping
     public List<DataResponse> getAllData() {
@@ -49,7 +56,10 @@ public class DataController {
     }
 
     private Data convertToData(DataRequest dataRequest) {
-        return modelMapper.map(dataRequest, Data.class);
+        Data data = modelMapper.map(dataRequest, Data.class);
+        data.setShop(shopsService.findOne(dataRequest.getShopIndex()));
+        data.setEmployee(employeesService.findOne(dataRequest.getEmployeeIndex()));
+        return data;
     }
 
     private Data convertToData(DataResponse dataResponse) {

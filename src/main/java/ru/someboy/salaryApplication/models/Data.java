@@ -16,7 +16,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
+//@ToString
 public class Data {
     @Id
     @Column(name = "id")
@@ -117,4 +117,41 @@ public class Data {
 
     @Transient
     private List<Repair> repairs;
+
+    @Override
+    public String toString() {
+        return "Data{" +
+                "id=" + id +
+                ", accessoriesCount=" + accessoriesCount +
+                ", accessoriesRevenue=" + accessoriesRevenue +
+                ", accessoriesSalary=" + accessoriesSalary +
+                ", bonus=" + bonus +
+                ", marketingMargin=" + marketingMargin +
+                ", marketingMarginProfit=" + marketingMarginProfit +
+                ", marketingMarginSalary=" + marketingMarginSalary +
+                ", simCount=" + simCount +
+                ", simRevenue=" + simRevenue +
+                ", simSalary=" + simSalary +
+                ", devicesCount=" + devicesCount +
+                ", devicesRevenue=" + devicesRevenue +
+                ", devicesPurchase=" + devicesPurchase +
+                ", devicesProfit=" + devicesProfit +
+                ", devicesSalary=" + devicesSalary +
+                ", repairsCount=" + repairsCount +
+                ", repairsRevenue=" + repairsRevenue +
+                ", repairsPurchase=" + repairsPurchase +
+                ", repairsProfit=" + repairsProfit +
+                ", repairsSalary=" + repairsSalary +
+                ", dateOfEntry=" + dateOfEntry +
+                ", dateOfData=" + dateOfData +
+                ", expenses=" + expenses +
+                ", annotation='" + annotation + '\'' +
+                ", cash=" + cash +
+                ", cashless=" + cashless +
+                ", salary=" + salary +
+                ", employee=" + employee.getUsername() +
+                ", shop=" + shop.getName() +
+//                ", repairs=" + repairs.get(1) +
+                '}';
+    }
 }

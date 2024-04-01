@@ -1,5 +1,6 @@
 package ru.someboy.salaryApplication.dto;
 
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
@@ -39,4 +40,9 @@ public class DataRequest {
     private Integer cash;
 
     private Integer cashless;
+    @NotNull
+    private Integer shopIndex;
+
+    @NotNull
+    private Integer employeeIndex;
 }
