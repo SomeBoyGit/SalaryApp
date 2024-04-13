@@ -1,7 +1,6 @@
 package ru.someboy.salaryApplication.services;
 
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.someboy.salaryApplication.models.Data;
@@ -21,8 +20,6 @@ import static ru.someboy.salaryApplication.util.Methods.startAndEndDateTimeList;
 @RequiredArgsConstructor
 public class DataFullMonthService {
     private final DataFullMonthRepository dfmRepository;
-    private final EmployeesService employeesService;
-    private final ModelMapper modelMapper;
 
     public List<DataFullMonth> findAll() {
         return dfmRepository.findAll();
@@ -83,12 +80,13 @@ public class DataFullMonthService {
                 dfm.setRepairsCount(dfm.getRepairsCount() + data.getRepairsCount());
                 dfm.setRepairsRevenue(dfm.getRepairsRevenue() + data.getRepairsRevenue());
                 dfm.setRepairsPurchase(dfm.getRepairsPurchase() + data.getRepairsPurchase());
-                dfm.setRepairsProfit(dfm.getDevicesProfit() + data.getDevicesProfit());
+                dfm.setRepairsProfit(dfm.getRepairsProfit() + data.getRepairsProfit());
                 dfm.setRepairsSalary(dfm.getRepairsSalary() + data.getRepairsSalary());
                 dfm.setExpenses(dfm.getExpenses() + data.getExpenses());
                 dfm.setCash(dfm.getCash() + data.getCash());
                 dfm.setCashless(dfm.getCashless() + data.getCashless());
                 dfm.setSalary(dfm.getSalary() + data.getSalary());
+                dfm.setAllRevenue(dfm.getAllRevenue() + data.getAllRevenue());
             });
             dfm.setEmployee(dataList.get(0).getEmployee());
             dfm.setDate(startAndEndDateTimeList(dataList.get(0).getDateOfData()).get(0));
@@ -112,17 +110,18 @@ public class DataFullMonthService {
         dataFullMonth.setDevicesCount(0);
         dataFullMonth.setDevicesRevenue(0);
         dataFullMonth.setDevicesPurchase(0);
-        dataFullMonth.setDevicesProfit(0d);
+        dataFullMonth.setDevicesProfit(0);
         dataFullMonth.setDevicesSalary(0d);
         dataFullMonth.setRepairsCount(0);
         dataFullMonth.setRepairsRevenue(0);
         dataFullMonth.setRepairsPurchase(0);
-        dataFullMonth.setRepairsProfit(0d);
+        dataFullMonth.setRepairsProfit(0);
         dataFullMonth.setRepairsSalary(0d);
         dataFullMonth.setExpenses(0);
         dataFullMonth.setCash(0);
         dataFullMonth.setCashless(0);
         dataFullMonth.setSalary(0d);
+        dataFullMonth.setAllRevenue(0d);
         return dataFullMonth;
     }
 }

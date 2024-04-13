@@ -6,12 +6,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.someboy.salaryApplication.dto.RepairAcceptance;
-import ru.someboy.salaryApplication.dto.RepairDone;
 import ru.someboy.salaryApplication.dto.RepairIssue;
 import ru.someboy.salaryApplication.dto.RepairResponse;
 import ru.someboy.salaryApplication.models.Repair;
 import ru.someboy.salaryApplication.services.EmployeesService;
 import ru.someboy.salaryApplication.services.RepairsService;
+import ru.someboy.salaryApplication.services.RepairsService2;
 import ru.someboy.salaryApplication.services.ShopsService;
 
 import java.util.List;
@@ -21,7 +21,8 @@ import java.util.stream.Collectors;
 @RequestMapping("/repairs")
 @RequiredArgsConstructor
 public class RepairsController {
-    private final RepairsService repairsService;
+//    private final RepairsService repairsService; TODO
+    private final RepairsService2 repairsService;
     private final EmployeesService employeesService;
     private final ShopsService shopsService;
     private final ModelMapper modelMapper;
@@ -38,9 +39,7 @@ public class RepairsController {
 
     @PostMapping
     public ResponseEntity<HttpStatus> create(@RequestBody RepairAcceptance repairAcceptance) {
-        Repair repair = convertToRepair(repairAcceptance);
-        repair.setShop(shopsService.findOne(repairAcceptance.getShopId()));
-        repairsService.save(repair);
+        repairsService.save(convertToRepair(repairAcceptance));
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
@@ -75,12 +74,16 @@ public class RepairsController {
     }
 
     private Repair convertToRepair(RepairAcceptance repairAcceptance) {
-        return modelMapper.map(repairAcceptance, Repair.class);
+        Repair repair = modelMapper.map(repairAcceptance, Repair.class);
+        repair.setSeller(employeesService.findOne(repairAcceptance.getSellerIndex()));
+        repair.setShop(shopsService.findOne(repairAcceptance.getShopIndex()));
+        return repair;
     }
 
     private Repair convertToRepair(RepairIssue repairIssue) {
         Repair repair = modelMapper.map(repairIssue, Repair.class);
-        repair.setMaster(employeesService.findOne(repairIssue.getMasterId()));
+        repair.setEmployee(employeesService.findOne(repairIssue.getEmployeeIndex()));
+        repair.setMaster(employeesService.findOne(repairIssue.getMasterIndex()));
         return repair;
     }
 

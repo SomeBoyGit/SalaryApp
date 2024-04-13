@@ -1,5 +1,6 @@
 package ru.someboy.salaryApplication.dto;
 
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
@@ -11,10 +12,16 @@ public class ShopRequest {
     private String name;
 
     @NotNull
-    private Double rental;
+    private Integer rental;
 
     @NotNull
     private Integer accessoriesPercent;
+
+    @NotNull
+    private Integer bonusDepends;
+
+    @NotNull
+    private Integer bonusAmount;
 
     @NotNull
     private Integer marketingMarginPercent;
@@ -24,6 +31,9 @@ public class ShopRequest {
 
     @NotNull
     private Integer devicesPercent;
+
+    @NotNull
+    private Integer minimumWage;
 
     @NotNull
     private Boolean isWork;

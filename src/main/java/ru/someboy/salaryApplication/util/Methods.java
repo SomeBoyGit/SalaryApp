@@ -1,6 +1,7 @@
 package ru.someboy.salaryApplication.util;
 
-import java.time.LocalDate;
+import ru.someboy.salaryApplication.models.Employee;
+
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -23,14 +24,6 @@ public final class Methods {
         return localDateTime.with(LocalTime.MAX).minusNanos(1);
     }
 
-//    public static LocalDateTime dateTimeToEndDayMinusNano(LocalDate localDate) {
-//        return localDate.with(LocalTime.MAX).plusDays(1).atStartOfDay();
-//    }
-
-    public static LocalDateTime stringDateTimeToLocalDateTimePlusMin(String dateTime) {
-        return dateTimeToStartDayPlusMin(stringDateTimeToLocalDateTime(dateTime));
-    }
-
     public static List<LocalDateTime> startAndEndDateTimeList(LocalDateTime dateTime) {
         List<LocalDateTime> dateTimeList = new ArrayList<>();
         dateTimeList.add(0, dateTimeToStartDayPlusMin(dateTime.withDayOfMonth(1)));
@@ -40,7 +33,7 @@ public final class Methods {
 
     public static List<LocalDateTime> startAndEndDateTimeListHalfMonth(LocalDateTime dateTime) {
         List<LocalDateTime> dateTimeList = new ArrayList<>();
-        if(dateTime.getDayOfMonth() > 15) {
+        if (dateTime.getDayOfMonth() > 15) {
             dateTimeList.add(0, dateTimeToStartDayPlusMin(dateTime.withDayOfMonth(16)));
             dateTimeList.add(1, dateTimeToEndDayMinusNano(dateTime.toLocalDate().with(TemporalAdjusters.lastDayOfMonth()).atStartOfDay()).minusNanos(1));
         } else {
@@ -52,5 +45,17 @@ public final class Methods {
 
     public static Object getPresentOptional(Optional<?> optional) {
         return optional.orElse(null);
+    }
+
+    public static <T> ArrayList<T> removeDuplicates(ArrayList<T> list) {
+        ArrayList<T> newList = new ArrayList<>();
+        list.forEach(element -> {
+            if(!newList.contains(element)) newList.add(element);
+        });
+        return newList;
+    }
+
+    public static double percentageOf(int amount, int percent) {
+        return amount * percent / 100d;
     }
 }

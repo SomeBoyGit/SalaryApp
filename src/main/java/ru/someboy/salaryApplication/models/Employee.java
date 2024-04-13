@@ -15,7 +15,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
+//@ToString
 public class Employee {
     @Id
     @Column(name = "id")
@@ -51,5 +51,20 @@ public class Employee {
         this.username = username;
         this.password = password;
         this.dateOfBirth = dateOfBirth;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password=" + password +
+                ", dateOfBirth=" + dateOfBirth +
+                ", dateOfRegistration=" + dateOfRegistration +
+                ", isWork=" + isWork +
+                ", authorities=" + authorities +
+                ", shops=" + shops.size() +
+                ", repairs=" + repairs.size() +
+                '}';
     }
 }

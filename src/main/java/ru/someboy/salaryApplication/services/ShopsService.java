@@ -46,12 +46,15 @@ public class ShopsService {
             if (shop.getName() != null) updateShop.setName(shop.getName());
             if (shop.getRental() != null) updateShop.setRental(shop.getRental());
             if (shop.getAccessoriesPercent() != null) updateShop.setAccessoriesPercent(shop.getAccessoriesPercent());
+            if (shop.getBonusDepends() != null) updateShop.setBonusDepends(shop.getBonusDepends());
+            if (shop.getBonusAmount() != null) updateShop.setBonusAmount(shop.getBonusAmount());
             if (shop.getMarketingMarginPercent() != null)
                 updateShop.setMarketingMarginPercent(shop.getMarketingMarginPercent());
-            if(shop.getSimPercent() != null) updateShop.setSimPercent(shop.getSimPercent());
-            if(shop.getDevicesPercent() != null) updateShop.setDevicesPercent(shop.getDevicesPercent());
-            if(shop.getIsWork() != null) updateShop.setIsWork(shop.getIsWork());
-            if(shop.getEmployees() != null) updateShop.setEmployees(shop.getEmployees());
+            if (shop.getSimPercent() != null) updateShop.setSimPercent(shop.getSimPercent());
+            if (shop.getDevicesPercent() != null) updateShop.setDevicesPercent(shop.getDevicesPercent());
+            if (shop.getMinimumWage() != null) updateShop.setMinimumWage(shop.getMinimumWage());
+            if (shop.getIsWork() != null) updateShop.setIsWork(shop.getIsWork());
+            if (shop.getEmployees() != null) updateShop.setEmployees(shop.getEmployees());
             return updateShop;
         } else {
             shop.setDateOfRegistration(LocalDate.now());

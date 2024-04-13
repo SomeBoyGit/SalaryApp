@@ -100,6 +100,9 @@ public class DataResponse {
     private Double salary;
 
     @NotNull
+    private Double allRevenue;
+
+    @NotNull
     private Employee employee;
 
     @NotNull

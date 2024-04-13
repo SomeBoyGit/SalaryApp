@@ -6,7 +6,6 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -105,6 +104,9 @@ public class Data {
     @Column(name = "salary")
     private Double salary;
 
+    @Column(name = "all_revenue")
+    private Double allRevenue;
+
     @NotNull
     @ManyToOne
     @JoinColumn(name = "employee_id", referencedColumnName = "id")
@@ -117,6 +119,43 @@ public class Data {
 
     @Transient
     private List<Repair> repairs;
+
+    public Data(Integer accessoriesCount, Integer accessoriesRevenue, Double accessoriesSalary, Integer bonus,
+                Integer marketingMargin, Double marketingMarginProfit, Double marketingMarginSalary, Integer simCount,
+                Integer simRevenue, Double simSalary, Integer devicesCount, Integer devicesRevenue,
+                Integer devicesPurchase, Integer devicesProfit, Double devicesSalary, Integer repairsCount,
+                Integer repairsRevenue, Integer repairsPurchase, Integer repairsProfit, Double repairsSalary,
+                LocalDateTime dateOfEntry, LocalDateTime dateOfData, Integer expenses, String annotation, Integer cash,
+                Integer cashless, Double salary, Double allRevenue) {
+        this.accessoriesCount = accessoriesCount;
+        this.accessoriesRevenue = accessoriesRevenue;
+        this.accessoriesSalary = accessoriesSalary;
+        this.bonus = bonus;
+        this.marketingMargin = marketingMargin;
+        this.marketingMarginProfit = marketingMarginProfit;
+        this.marketingMarginSalary = marketingMarginSalary;
+        this.simCount = simCount;
+        this.simRevenue = simRevenue;
+        this.simSalary = simSalary;
+        this.devicesCount = devicesCount;
+        this.devicesRevenue = devicesRevenue;
+        this.devicesPurchase = devicesPurchase;
+        this.devicesProfit = devicesProfit;
+        this.devicesSalary = devicesSalary;
+        this.repairsCount = repairsCount;
+        this.repairsRevenue = repairsRevenue;
+        this.repairsPurchase = repairsPurchase;
+        this.repairsProfit = repairsProfit;
+        this.repairsSalary = repairsSalary;
+        this.dateOfEntry = dateOfEntry;
+        this.dateOfData = dateOfData;
+        this.expenses = expenses;
+        this.annotation = annotation;
+        this.cash = cash;
+        this.cashless = cashless;
+        this.salary = salary;
+        this.allRevenue = allRevenue;
+    }
 
     @Override
     public String toString() {
@@ -151,6 +190,7 @@ public class Data {
                 ", salary=" + salary +
                 ", employee=" + employee.getUsername() +
                 ", shop=" + shop.getName() +
+                ", allRevenue=" + allRevenue +
 //                ", repairs=" + repairs.get(1) +
                 '}';
     }

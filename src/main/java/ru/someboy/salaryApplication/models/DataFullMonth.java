@@ -65,7 +65,7 @@ public class DataFullMonth {
     private Integer devicesPurchase;
 
     @Column(name = "devices_profit")
-    private Double devicesProfit;
+    private Integer devicesProfit;
 
     @Column(name = "devices_salary")
     private Double devicesSalary;
@@ -80,7 +80,7 @@ public class DataFullMonth {
     private Integer repairsPurchase;
 
     @Column(name = "repairs_profit")
-    private Double repairsProfit;
+    private Integer repairsProfit;
 
     @Column(name = "repairs_salary")
     private Double repairsSalary;
@@ -99,6 +99,9 @@ public class DataFullMonth {
 
     @Column(name = "salary")
     private Double salary;
+
+    @Column(name = "all_revenue")
+    private Double allRevenue;
 
     @NotNull
     @ManyToOne

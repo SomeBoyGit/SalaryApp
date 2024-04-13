@@ -31,11 +31,19 @@ public class Shop {
 
     @NotNull
     @Column(name = "rental")
-    private Double rental;
+    private Integer rental;
 
     @NotNull
     @Column(name = "accessories_percent")
     private Integer accessoriesPercent;
+
+    @NotNull
+    @Column(name = "bonus_depends")
+    private Integer bonusDepends;
+
+    @NotNull
+    @Column(name = "bonus_amount")
+    private Integer bonusAmount;
 
     @NotNull
     @Column(name = "marketing_margin_percent")
@@ -48,6 +56,10 @@ public class Shop {
     @NotNull
     @Column(name = "devices_percent")
     private Integer devicesPercent;
+
+    @NotNull
+    @Column(name = "minimum_wage")
+    private Integer minimumWage;
 
     @NotNull
     @Column(name = "is_work")

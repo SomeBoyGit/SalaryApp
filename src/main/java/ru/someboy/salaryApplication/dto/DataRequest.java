@@ -24,12 +24,6 @@ public class DataRequest {
 
     private Integer devicesPurchase;
 
-    private Integer repairsCount;
-
-    private Integer repairsRevenue;
-
-    private Integer repairsPurchase;
-
     private LocalDateTime dateOfData;
 
     private Integer expenses;

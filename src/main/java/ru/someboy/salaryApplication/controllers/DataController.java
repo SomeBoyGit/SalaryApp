@@ -11,6 +11,7 @@ import ru.someboy.salaryApplication.models.Data;
 import ru.someboy.salaryApplication.models.Employee;
 import ru.someboy.salaryApplication.models.Repair;
 import ru.someboy.salaryApplication.services.DataService;
+import ru.someboy.salaryApplication.services.DataService2;
 import ru.someboy.salaryApplication.services.EmployeesService;
 import ru.someboy.salaryApplication.services.ShopsService;
 
@@ -22,7 +23,8 @@ import java.util.stream.Collectors;
 @RequestMapping("/data")
 @RequiredArgsConstructor
 public class DataController {
-    private final DataService dataService;
+//    private final DataService dataService; TODO
+    private final DataService2 dataService;
     private final ShopsService shopsService;
     private final ModelMapper modelMapper;
     private final EmployeesService employeesService;
@@ -60,10 +62,6 @@ public class DataController {
         data.setShop(shopsService.findOne(dataRequest.getShopIndex()));
         data.setEmployee(employeesService.findOne(dataRequest.getEmployeeIndex()));
         return data;
-    }
-
-    private Data convertToData(DataResponse dataResponse) {
-        return modelMapper.map(dataResponse, Data.class);
     }
 
     private DataResponse convertToDataResponse(Data data) {

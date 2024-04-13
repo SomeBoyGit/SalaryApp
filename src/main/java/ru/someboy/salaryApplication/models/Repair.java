@@ -35,7 +35,7 @@ public class Repair {
     private Integer repairsPurchase;
 
     @Column(name = "repairs_profit")
-    private Double repairsProfit;
+    private Integer repairsProfit;
 
     @Column(name = "seller_salary")
     private Double sellerSalary;
@@ -78,7 +78,7 @@ public class Repair {
     @JoinColumn(name = "shop_id", referencedColumnName = "id")
     private Shop shop;
 
-    public Repair(String phoneNumber, Integer repairsRevenue, Integer repairsPurchase, Double repairsProfit,
+    public Repair(String phoneNumber, Integer repairsRevenue, Integer repairsPurchase, Integer repairsProfit,
                   Double sellerSalary, Double masterSalary, LocalDateTime dateOfAcceptance,
                   LocalDateTime dateOfDone, LocalDateTime dateOfIssue, Boolean isDone, String annotation,
                   Employee employee, Employee seller, Employee master, Shop shop) {
@@ -114,6 +114,10 @@ public class Repair {
                 ", dateOfIssue=" + dateOfIssue +
                 ", isDone=" + isDone +
                 ", annotation='" + annotation + '\'' +
+                ", employee=" + employee +
+                ", seller=" + seller +
+                ", master=" + master +
+//                ", shop=" + shop +
                 '}';
     }
 }

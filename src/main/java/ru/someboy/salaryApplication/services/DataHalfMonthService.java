@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
-import static ru.someboy.salaryApplication.util.Methods.startAndEndDateTimeList;
 import static ru.someboy.salaryApplication.util.Methods.startAndEndDateTimeListHalfMonth;
 
 @Service
@@ -81,12 +80,13 @@ public class DataHalfMonthService {
                 dhm.setRepairsCount(dhm.getRepairsCount() + data.getRepairsCount());
                 dhm.setRepairsRevenue(dhm.getRepairsRevenue() + data.getRepairsRevenue());
                 dhm.setRepairsPurchase(dhm.getRepairsPurchase() + data.getRepairsPurchase());
-                dhm.setRepairsProfit(dhm.getDevicesProfit() + data.getDevicesProfit());
+                dhm.setRepairsProfit(dhm.getRepairsProfit() + data.getRepairsProfit());
                 dhm.setRepairsSalary(dhm.getRepairsSalary() + data.getRepairsSalary());
                 dhm.setExpenses(dhm.getExpenses() + data.getExpenses());
                 dhm.setCash(dhm.getCash() + data.getCash());
                 dhm.setCashless(dhm.getCashless() + data.getCashless());
                 dhm.setSalary(dhm.getSalary() + data.getSalary());
+                dhm.setAllRevenue(dhm.getAllRevenue() + data.getAllRevenue());
             });
             dhm.setEmployee(dataList.get(0).getEmployee());
             dhm.setDate(startAndEndDateTimeListHalfMonth(dataList.get(0).getDateOfData()).get(0));
@@ -110,17 +110,18 @@ public class DataHalfMonthService {
         dataHalfMonth.setDevicesCount(0);
         dataHalfMonth.setDevicesRevenue(0);
         dataHalfMonth.setDevicesPurchase(0);
-        dataHalfMonth.setDevicesProfit(0d);
+        dataHalfMonth.setDevicesProfit(0);
         dataHalfMonth.setDevicesSalary(0d);
         dataHalfMonth.setRepairsCount(0);
         dataHalfMonth.setRepairsRevenue(0);
         dataHalfMonth.setRepairsPurchase(0);
-        dataHalfMonth.setRepairsProfit(0d);
+        dataHalfMonth.setRepairsProfit(0);
         dataHalfMonth.setRepairsSalary(0d);
         dataHalfMonth.setExpenses(0);
         dataHalfMonth.setCash(0);
         dataHalfMonth.setCashless(0);
         dataHalfMonth.setSalary(0d);
+        dataHalfMonth.setAllRevenue(0d);
         return dataHalfMonth;
     }
 }

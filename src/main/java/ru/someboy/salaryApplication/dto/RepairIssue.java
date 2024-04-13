@@ -17,6 +17,9 @@ public class RepairIssue {
     private String annotation;
 
     @NotNull
-    private Integer masterId;
+    private Integer employeeIndex;
+
+    @NotNull
+    private Integer masterIndex;
 
 }

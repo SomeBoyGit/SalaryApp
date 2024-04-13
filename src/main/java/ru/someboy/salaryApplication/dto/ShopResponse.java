@@ -22,10 +22,16 @@ public class ShopResponse {
     private String name;
 
     @NotNull
-    private Double rental;
+    private Integer rental;
 
     @NotNull
     private Integer accessoriesPercent;
+
+    @NotNull
+    private Integer bonusDepends;
+
+    @NotNull
+    private Integer bonusAmount;
 
     @NotNull
     private Integer marketingMarginPercent;
@@ -35,6 +41,9 @@ public class ShopResponse {
 
     @NotNull
     private Integer devicesPercent;
+
+    @NotNull
+    private Integer minimumWage;
 
     @NotNull
     private Boolean isWork;

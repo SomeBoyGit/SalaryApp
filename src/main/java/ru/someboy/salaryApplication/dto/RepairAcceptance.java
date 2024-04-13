@@ -5,6 +5,8 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.ToString;
 
+import java.time.LocalDateTime;
+
 @Data
 public class RepairAcceptance {
     @NotNull
@@ -15,7 +17,12 @@ public class RepairAcceptance {
     @Size(max = 300, message = "Аннотация должна содержать не более 300 символов")
     private String annotation;
 
+    private LocalDateTime dateOfAcceptance;
+
     @NotNull
-    private Integer shopId;
+    private Integer sellerIndex;
+
+    @NotNull
+    private Integer shopIndex;
 
 }
